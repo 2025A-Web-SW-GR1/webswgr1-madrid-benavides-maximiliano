@@ -20,10 +20,19 @@ body {
   padding: 20px;
 }
 
+.pagina-a4 {
+  width: 210mm;
+  height: 297mm;
+  background: white;
+  padding: 20mm;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  box-sizing: border-box;
+}
+
 /* Contenedor general en dos columnas */
 .container {
   display: flex;
-  max-width: 1000px;
+  max-width: 800px; /* Ancho máximo */
   margin: 0 auto;
   background-color: var(--blanco);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -37,7 +46,7 @@ body {
   border-radius: 0 40px 40px 0;             /* Esquinas redondeadas */
   padding: 20px;                   /* Espaciado interno */
   margin: 30px 0 30px 0;        /* Margen solo a la izquierda y vertical */
-  flex: 0.6;                         /* Asegura que ocupe espacio proporcional */
+  flex: 0.8;                         /* Asegura que ocupe espacio proporcional */
 }
 
 /* Imagen */
@@ -53,7 +62,7 @@ body {
 
 /* Columna Derecha */
 .columna-derecha {
-  flex: 1.4;
+  flex: 1.2;
   background-color: #ffffff;
   color: #000000;
   padding: 30px;
@@ -61,12 +70,12 @@ body {
   margin: 10px 10px 10px 0; /* Margen solo a la derecha y vertical */
 }
 
-.seccion-centrada {
+.seccion-centradaNombre {
   text-align: center;
   width: 100%;
 }
 
-.seccion-centrada2 {
+.seccion-centradaIzquierda {
   margin-left: 50px;
   text-align: left;
 }	
@@ -74,34 +83,42 @@ body {
 .columna-derecha a {
   color: var(--blanco);
   text-decoration: none;
-}
+}     
 
 h1 {
-    font-family: 'open sans', sans-serif;
+    font-family: 'roboto mono', sans-serif;
   font-size: 40px;
+  font-weight: 180;
   margin-bottom: 5px;
 }
 
 h2 {
-    font-family: 'inter', sans-serif;
+    font-family: 'Open Sans', sans-serif;
   font-size: 15px;
+  font-weight: 600;
   color: var(--azul-oscuro);
   background-color: var(--blanco);
   margin-top: 30px;
   margin-bottom: 100px;
   text-transform: uppercase;
   display: inline-block; /* Para que el fondo blanco se ajuste al texto */
-    padding: 5px 10px; /* Espaciado interno */
+  padding: 5px 10px; /* Espaciado interno */
+  letter-spacing: 2px; /* Espaciado entre letras */
+
 }
 
 h3 {
-  font-family: 'outfit', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 800;
   font-size: 20px;
+  color: var(--blanco);
+  background-color: var(--azul-oscuro);
+  padding: 10px 20px; /* Espaciado interno */
   margin-top: 20px;
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  border-radius: 0 40px 40px 0; /* Bordes suavemente redondeados */
 }
 
 a {
