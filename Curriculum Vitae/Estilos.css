@@ -1,6 +1,7 @@
 /* Colores base */
 :root {
-  --azul-oscuro:  #052a50;       /* Azul Bootstrap */
+  --azul-oscuro: #052a50;
+  /* Azul Bootstrap */
   --blanco: #ffffff;
   --gris-claro: #f4f4f4;
   --texto: #333333;
@@ -25,37 +26,48 @@ body {
   height: 297mm;
   background: white;
   padding: 20mm;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
 }
 
 /* Contenedor general en dos columnas */
 .container {
   display: flex;
-  max-width: 800px; /* Ancho máximo */
+  max-width: 800px;
+  /* Ancho máximo */
   margin: 0 auto;
   background-color: var(--blanco);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  gap: 20px; /* Espacio entre columnas */
+  gap: 20px;
+  /* Espacio entre columnas */
 }
 
 /* Columna Izquierda */
 .columna-izquierda {
-  background-color: var(--azul-oscuro);       /* Azul Bootstrap */
-  color: white;                    /* Texto blanco */
-  border-radius: 0 40px 40px 0;             /* Esquinas redondeadas */
-  padding: 20px;                   /* Espaciado interno */
-  margin: 30px 0 30px 0;        /* Margen solo a la izquierda y vertical */
-  flex: 0.8;                         /* Asegura que ocupe espacio proporcional */
+  background-color: var(--azul-oscuro);
+  /* Azul Bootstrap */
+  color: white;
+  /* Texto blanco */
+  border-radius: 0 40px 40px 0;
+  /* Esquinas redondeadas */
+  padding: 20px;
+  /* Espaciado interno */
+  margin: 30px 0 30px 0;
+  /* Margen solo a la izquierda y vertical */
+  flex: 0.8;
+  /* Asegura que ocupe espacio proporcional */
 }
 
 /* Imagen */
 .foto-perfil {
   width: 320px;
   height: auto;
-  border: 2px solid #ffffff;  /* Azul oscuro */
-  border-radius: 15px; /* Bordes suavemente redondeados */
-  overflow: hidden; /* Previene que partes de la imagen sobresalgan */
+  border: 2px solid #ffffff;
+  /* Azul oscuro */
+  border-radius: 15px;
+  /* Bordes suavemente redondeados */
+  overflow: hidden;
+  /* Previene que partes de la imagen sobresalgan */
   margin-bottom: 20px;
 }
 
@@ -66,8 +78,10 @@ body {
   background-color: #ffffff;
   color: #000000;
   padding: 30px;
-  border-radius: 15px; /* Para igualar la estética */
-  margin: 10px 10px 10px 0; /* Margen solo a la derecha y vertical */
+  border-radius: 15px;
+  /* Para igualar la estética */
+  margin: 10px 10px 10px 0;
+  /* Margen solo a la derecha y vertical */
 }
 
 .seccion-centradaNombre {
@@ -78,22 +92,22 @@ body {
 .seccion-centradaIzquierda {
   margin-left: 50px;
   text-align: left;
-}	
+}
 
 .columna-derecha a {
   color: var(--blanco);
   text-decoration: none;
-}     
+}
 
 h1 {
-    font-family: 'roboto mono', sans-serif;
+  font-family: 'roboto mono', sans-serif;
   font-size: 40px;
   font-weight: 180;
   margin-bottom: 5px;
 }
 
 h2 {
-    font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 15px;
   font-weight: 600;
   color: var(--azul-oscuro);
@@ -101,9 +115,12 @@ h2 {
   margin-top: 30px;
   margin-bottom: 100px;
   text-transform: uppercase;
-  display: inline-block; /* Para que el fondo blanco se ajuste al texto */
-  padding: 5px 10px; /* Espaciado interno */
-  letter-spacing: 2px; /* Espaciado entre letras */
+  display: inline-block;
+  /* Para que el fondo blanco se ajuste al texto */
+  padding: 5px 10px;
+  /* Espaciado interno */
+  letter-spacing: 2px;
+  /* Espaciado entre letras */
 
 }
 
@@ -113,33 +130,41 @@ h3 {
   font-size: 20px;
   color: var(--blanco);
   background-color: var(--azul-oscuro);
-  padding: 10px 20px; /* Espaciado interno */
+  padding: 10px 20px;
+  /* Espaciado interno */
   margin-top: 20px;
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border-radius: 0 40px 40px 0; /* Bordes suavemente redondeados */
+  border-radius: 0 40px 40px 0;
+  /* Bordes suavemente redondeados */
 }
 
 a {
-  text-decoration: none; /* Quita el subrayado */
-  color: var(--blanco); /* Color de los enlaces */
+  text-decoration: none;
+  /* Quita el subrayado */
+  color: var(--blanco);
+  /* Color de los enlaces */
 }
 
 a:hover {
-  color: #1598a9; /* Cambia el color al pasar el cursor */
+  color: #1598a9;
+  /* Cambia el color al pasar el cursor */
 }
 
 a:active {
-  color: #ff9800; /* Cambia el color al hacer clic */
+  color: #ff9800;
+  /* Cambia el color al hacer clic */
 }
 
 a:visited {
-  color: var(--blanco); /* Color para enlaces ya visitados */
+  color: var(--blanco);
+  /* Color para enlaces ya visitados */
 }
 
 ul {
-  list-style: square; /* Cambia el estilo de la lista */
+  list-style: square;
+  /* Cambia el estilo de la lista */
   padding-left: 0;
   margin-bottom: 15px;
 }
@@ -158,7 +183,8 @@ p {
     flex-direction: column;
   }
 
-  .columna-derecha, .columna-izquierda {
+  .columna-derecha,
+  .columna-izquierda {
     flex: 1;
     padding: 20px;
     margin: 10px 0;
