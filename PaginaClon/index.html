@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
   <!-- Nuestro CSS -->
   <link rel="stylesheet" href="css\styles.css">
 </head>
+
 <body>
   <!-- Main App -->
   <div id="main-app">
@@ -23,11 +25,12 @@
             <input type="text" class="form-control search-input" placeholder="Search BootstrapBook">
           </div>
         </div>
-        
-        <button class="navbar-toggler sidebar-toggle d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#leftSidebarOffcanvas">
+
+        <button class="navbar-toggler sidebar-toggle d-md-none" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#leftSidebarOffcanvas">
           <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <div class="d-flex align-items-center ms-auto">
           <div class="nav-icon">
             <i class="bi bi-people fs-5"></i>
@@ -40,12 +43,15 @@
           </div>
           <div class="dropdown">
             <div class="nav-icon" role="button" data-bs-toggle="dropdown">
-              <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Profile" class="avatar">
+              <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                alt="Profile" class="avatar">
             </div>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="#">Profile</a></li>
               <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
               <li><a class="dropdown-item" href="#" id="logout-btn">Logout</a></li>
             </ul>
           </div>
@@ -62,7 +68,8 @@
             <div class="card mb-3">
               <div class="card-body">
                 <div class="d-flex align-items-center mb-3">
-                  <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Profile" class="avatar me-2">
+                  <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                    alt="Profile" class="avatar me-2">
                   <div>John Doe</div>
                 </div>
                 <div class="list-group list-group-flush">
@@ -102,7 +109,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Mobile Offcanvas Sidebar -->
         <div class="offcanvas offcanvas-start" tabindex="-1" id="leftSidebarOffcanvas">
           <div class="offcanvas-header">
@@ -113,7 +120,8 @@
             <div class="card mb-3">
               <div class="card-body">
                 <div class="d-flex align-items-center mb-3">
-                  <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Profile" class="avatar me-2">
+                  <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                    alt="Profile" class="avatar me-2">
                   <div>John Doe</div>
                 </div>
                 <div class="list-group list-group-flush">
@@ -153,16 +161,18 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Main Feed -->
         <div class="col-lg-6 col-md-9 mx-auto">
           <!-- Post Composer -->
           <div class="card composer-card mb-3">
             <div class="card-body">
               <div class="d-flex mb-3">
-                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Profile" class="avatar me-2">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                  alt="Profile" class="avatar me-2">
                 <div class="flex-grow-1">
-                  <textarea class="form-control composer-input" rows="2" placeholder="What's on your mind, John?"></textarea>
+                  <textarea class="form-control composer-input" rows="2"
+                    placeholder="What's on your mind, John?"></textarea>
                 </div>
               </div>
               <div class="composer-actions d-flex">
@@ -178,7 +188,7 @@
               </div>
             </div>
           </div>
-          
+
           <!-- Loading Spinner -->
           <div id="feed-loader" class="text-center my-5">
             <div class="spinner-border text-primary" role="status">
@@ -186,21 +196,23 @@
             </div>
             <p class="mt-2 text-secondary">Loading your feed...</p>
           </div>
-          
+
           <!-- Post Feed -->
           <div id="post-feed" class="d-none">
             <!-- Post 1 -->
             <div class="card post-card">
               <div class="card-body">
                 <div class="d-flex align-items-center mb-2">
-                  <img src="https://cdn.pixabay.com/photo/2017/01/31/21/23/avatar-2027366_960_720.png" alt="User" class="avatar me-2">
+                  <img src="https://cdn.pixabay.com/photo/2017/01/31/21/23/avatar-2027366_960_720.png" alt="User"
+                    class="avatar me-2">
                   <div>
                     <div class="fw-bold">Maximiliano Madrid</div>
                     <div class="text-secondary small">2 hours ago</div>
                   </div>
                 </div>
                 <p>Una hermosa vista de este paisaje, parece nublado pero a la vez tiene muchos rayos. </p>
-                <img src="https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg" alt="Emerald Lake" class="img-fluid rounded post-image" data-bs-toggle="modal" data-bs-target="#imageModal">
+                <img src="https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg" alt="Emerald Lake"
+                  class="img-fluid rounded post-image" data-bs-toggle="modal" data-bs-target="#imageModal">
                 <div class="d-flex post-actions mt-3">
                   <div class="post-action d-flex align-items-center justify-content-center">
                     <i class="bi bi-hand-thumbs-up me-2"></i> Like
@@ -214,18 +226,21 @@
                 </div>
               </div>
             </div>
-            
+
             <!-- Post 2 -->
             <div class="card post-card">
               <div class="card-body">
                 <div class="d-flex align-items-center mb-2">
-                  <img src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png" alt="User" class="avatar me-2">
+                  <img src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png" alt="User"
+                    class="avatar me-2">
                   <div>
                     <div class="fw-bold">Mickaela Ruiz</div>
                     <div class="text-secondary small">5 hours ago</div>
                   </div>
                 </div>
-                <p>Excited to announce that I've just launched my new tech blog! I'll be covering the latest in AI, web development, and tech ethics. Check it out and let me know what you think! 💻 #techjourneys #coding</p>
+                <p>Excited to announce that I've just launched my new tech blog! I'll be covering the latest in AI, web
+                  development, and tech ethics. Check it out and let me know what you think! 💻 #techjourneys #coding
+                </p>
                 <div class="d-flex post-actions mt-3">
                   <div class="post-action d-flex align-items-center justify-content-center">
                     <i class="bi bi-hand-thumbs-up me-2"></i> Like
@@ -239,19 +254,23 @@
                 </div>
               </div>
             </div>
-            
+
             <!-- Post 3 -->
             <div class="card post-card">
               <div class="card-body">
                 <div class="d-flex align-items-center mb-2">
-                  <img src="https://cdn.pixabay.com/photo/2014/04/03/10/32/user-297566_960_720.png" alt="User" class="avatar me-2">
+                  <img src="https://cdn.pixabay.com/photo/2014/04/03/10/32/user-297566_960_720.png" alt="User"
+                    class="avatar me-2">
                   <div>
                     <div class="fw-bold">Emma Rodriguez</div>
                     <div class="text-secondary small">Yesterday at 8:45 PM</div>
                   </div>
                 </div>
-                <p>Just finished reading "The Midnight Library" by Matt Haig. Such a beautiful story about appreciating the life you have while understanding that there are infinite possibilities. Highly recommend! 📚 #bookrecommendation #amreading</p>
-                <img src="https://cdn.pixabay.com/photo/2016/03/26/22/21/books-1281581_960_720.jpg" alt="Books" class="img-fluid rounded post-image" data-bs-toggle="modal" data-bs-target="#imageModal">
+                <p>Just finished reading "The Midnight Library" by Matt Haig. Such a beautiful story about appreciating
+                  the life you have while understanding that there are infinite possibilities. Highly recommend! 📚
+                  #bookrecommendation #amreading</p>
+                <img src="https://cdn.pixabay.com/photo/2016/03/26/22/21/books-1281581_960_720.jpg" alt="Books"
+                  class="img-fluid rounded post-image" data-bs-toggle="modal" data-bs-target="#imageModal">
                 <div class="d-flex post-actions mt-3">
                   <div class="post-action d-flex align-items-center justify-content-center">
                     <i class="bi bi-hand-thumbs-up me-2"></i> Like
@@ -265,7 +284,7 @@
                 </div>
               </div>
             </div>
-            
+
             <!-- Load More Spinner -->
             <div id="load-more-spinner" class="text-center my-4">
               <div class="spinner-border text-primary" role="status">
@@ -275,7 +294,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Right Sidebar -->
         <div class="col-lg-3 d-none d-lg-block right-sidebar">
           <div class="sidebar">
@@ -284,7 +303,8 @@
                 <h6 class="card-title">People You May Know</h6>
                 <!-- Friend Suggestion 1 -->
                 <div class="d-flex align-items-center mb-3 friend-suggestion p-2 rounded">
-                  <img src="https://cdn.pixabay.com/photo/2018/08/28/13/29/avatar-3637561_960_720.png" alt="Friend" class="avatar me-2">
+                  <img src="https://cdn.pixabay.com/photo/2018/08/28/13/29/avatar-3637561_960_720.png" alt="Friend"
+                    class="avatar me-2">
                   <div class="flex-grow-1">
                     <div class="fw-bold">Alex Turner</div>
                     <div class="small text-secondary">3 mutual friends</div>
@@ -293,7 +313,8 @@
                 </div>
                 <!-- Friend Suggestion 2 -->
                 <div class="d-flex align-items-center mb-3 friend-suggestion p-2 rounded">
-                  <img src="https://cdn.pixabay.com/photo/2017/01/31/19/07/avatar-2026510_960_720.png" alt="Friend" class="avatar me-2">
+                  <img src="https://cdn.pixabay.com/photo/2017/01/31/19/07/avatar-2026510_960_720.png" alt="Friend"
+                    class="avatar me-2">
                   <div class="flex-grow-1">
                     <div class="fw-bold">Jessica Lee</div>
                     <div class="small text-secondary">5 mutual friends</div>
@@ -302,7 +323,8 @@
                 </div>
                 <!-- Friend Suggestion 3 -->
                 <div class="d-flex align-items-center friend-suggestion p-2 rounded">
-                  <img src="https://cdn.pixabay.com/photo/2014/03/25/16/54/user-297566_960_720.png" alt="Friend" class="avatar me-2">
+                  <img src="https://cdn.pixabay.com/photo/2014/03/25/16/54/user-297566_960_720.png" alt="Friend"
+                    class="avatar me-2">
                   <div class="flex-grow-1">
                     <div class="fw-bold">David Wilson</div>
                     <div class="small text-secondary">2 mutual friends</div>
@@ -334,7 +356,8 @@
               <div class="card-body">
                 <h6 class="card-title">Sponsored</h6>
                 <a href="#" class="text-decoration-none text-dark">
-                  <img src="https://cdn.pixabay.com/photo/2015/01/21/14/14/apple-606761_960_720.jpg" alt="Ad" class="img-fluid rounded mb-2">
+                  <img src="https://cdn.pixabay.com/photo/2015/01/21/14/14/apple-606761_960_720.jpg" alt="Ad"
+                    class="img-fluid rounded mb-2">
                   <div class="fw-bold">Tech Gadgets Store</div>
                   <div class="small text-secondary">Shop the latest gadgets with 20% off for new customers!</div>
                 </a>
@@ -366,4 +389,5 @@
   <!-- Nuestro JS -->
   <script src="js\app.js"></script>
 </body>
+
 </html>
