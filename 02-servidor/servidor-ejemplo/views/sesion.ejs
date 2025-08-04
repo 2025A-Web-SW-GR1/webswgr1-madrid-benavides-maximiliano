@@ -4,123 +4,607 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Datos de Sesión</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <title>Portal de Datos - Sesión Activa</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #f8f9fa;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            overflow-x: hidden;
+            position: relative;
         }
 
-        .container-custom {
-            max-width: 600px;
-            margin-top: 50px;
-        }
-
-        .card-custom {
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-header-custom {
-            background-color: #0d6efd;
-            color: white;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-        }
-
-        .img-fluid-custom {
-            border-radius: 10px;
-        }
-
-        .table-session {
+        /* Animated background elements */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        .table-session th,
-        .table-session td {
-            padding: 1rem;
-            border-bottom: 1px solid #dee2e6;
+        .floating-shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: floating 8s ease-in-out infinite;
         }
 
-        .table-session th {
-            width: 40%;
-            background-color: #f1f1f1;
-            font-weight: bold;
+        .floating-shape:nth-child(1) { 
+            width: 120px; height: 120px; left: 15%; top: 20%; 
+            animation-delay: 0s; background: rgba(255, 255, 255, 0.08);
+        }
+        .floating-shape:nth-child(2) { 
+            width: 80px; height: 80px; right: 20%; top: 30%; 
+            animation-delay: 2s; background: rgba(255, 255, 255, 0.12);
+        }
+        .floating-shape:nth-child(3) { 
+            width: 60px; height: 60px; left: 70%; bottom: 40%; 
+            animation-delay: 4s; background: rgba(255, 255, 255, 0.1);
+        }
+        .floating-shape:nth-child(4) { 
+            width: 100px; height: 100px; left: 20%; bottom: 20%; 
+            animation-delay: 6s; background: rgba(255, 255, 255, 0.09);
         }
 
-        .table-session td {
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-30px) rotate(180deg); opacity: 0.8; }
+        }
+
+        /* Main container */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            padding: 30px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Card styling */
+        .session-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 700px;
+            overflow: hidden;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: slideInUp 1s ease-out forwards;
+        }
+
+        @keyframes slideInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Header */
+        .card-header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .header-title {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Card body */
+        .card-body {
+            padding: 40px;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Image container */
+        .image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .house-image {
+            width: 250px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .house-image:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-container:hover .image-overlay {
+            opacity: 1;
+        }
+
+        /* Info table */
+        .info-table {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-row {
+            display: flex;
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-row:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .info-label {
+            flex: 1;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .info-label i {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .info-row:hover .info-label i {
+            color: white;
+            transform: scale(1.2);
+        }
+
+        .info-value {
+            flex: 1;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
             text-align: right;
+            font-weight: 500;
         }
 
-        .alert-custom {
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            background-color: #ffeeba;
-            /* Un color de alerta más suave */
-            color: #664d03;
+        /* Action buttons */
+        .action-buttons {
+            display: grid;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn-action {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #feca57 0%, #ff9ff3 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(254, 202, 87, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(254, 202, 87, 0.4);
+            color: white;
+        }
+
+        .btn-action::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-action:hover::before {
+            left: 100%;
+        }
+
+        /* Access denied section */
+        .access-denied {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .access-denied-icon {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .access-denied-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .access-denied-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 20px 15px;
+            }
+            
+            .session-card {
+                max-width: 100%;
+            }
+            
+            .card-header, .card-body {
+                padding: 25px 20px;
+            }
+            
+            .header-title {
+                font-size: 1.8rem;
+            }
+            
+            .house-image {
+                width: 200px;
+                height: 160px;
+            }
+            
+            .info-row {
+                flex-direction: column;
+                gap: 10px;
+                text-align: left;
+            }
+            
+            .info-value {
+                text-align: left;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Loading states */
+        .loading-shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
     </style>
 </head>
 
 <body>
-    <div class="container container-custom">
-        <div class="card card-custom">
-            <div class="card-header card-header-custom text-center py-3">
-                <h2>Bienvenid@ </h2>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="session-card">
+            <!-- Header -->
+            <div class="card-header">
+                <h1 class="header-title">
+                    <i class="fas fa-crown" style="margin-right: 15px; color: #feca57;"></i>
+                    Bienvenid@
+                </h1>
             </div>
+
+            <!-- Card Body -->
             <div class="card-body">
                 <% if (casa?.username) { %>
-                    <h4 class="card-title text-center mb-4">Información de la Casa</h4>
-                    <div class="text-center mb-4">
-                        <img src="<%= casa.imagenURL %>" class="img-fluid img-fluid-custom" alt="Imagen de la casa"
-                            width="200">
+                    <!-- User Session Content -->
+                    <h2 class="section-title">
+                        <i class="fas fa-home" style="margin-right: 10px;"></i>
+                        Información de tu Propiedad
+                    </h2>
+
+                    <!-- House Image -->
+                    <div class="image-container">
+                        <img src="<%= casa.imagenURL %>" class="house-image" alt="Imagen de la casa">
+                        <div class="image-overlay"></div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-session">
-                            <tbody>
-                                <tr>
-                                    <th><i class="fas fa-user-circle me-2"></i>Usuario</th>
-                                    <td>
-                                        <%= casa.username %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th><i class="fas fa-home me-2"></i>Nombre de la Casa</th>
-                                    <td>
-                                        <%= casa.nombre %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th><i class="fas fa-dollar-sign me-2"></i>Valor</th>
-                                    <td>$<%= casa.valor %>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="d-grid gap-2 mt-4">
-                        <a href="/auth/todas" class="btn btn-primary">Ver todas las casas</a>
-                        <a href="/auth/logout" class="btn btn-danger">Cerrar sesión</a>
-                    </div>
-                    <% } else { %>
-                        <div class="text-center py-4">
-                            <i class="fas fa-user-lock text-warning fa-4x mb-3"></i>
-                            <h4 class="alert-heading fw-bold">Acceso Denegado</h4>
-                            <p class="mb-0">Para ver el contenido de esta página, por favor inicie sesión.</p>
+
+                    <!-- Info Table -->
+                    <div class="info-table">
+                        <div class="info-row">
+                            <div class="info-label">
+                                <i class="fas fa-user-circle"></i>
+                                Usuario
+                            </div>
+                            <div class="info-value"><%= casa.username %></div>
                         </div>
-                        <div class="d-grid gap-2 mt-4">
-                            <a href="/auth/login" class="btn btn-warning">Iniciar Sesión</a>
+                        <div class="info-row">
+                            <div class="info-label">
+                                <i class="fas fa-home"></i>
+                                Nombre de la Casa
+                            </div>
+                            <div class="info-value"><%= casa.nombre %></div>
                         </div>
-                        <% } %>
+                        <div class="info-row">
+                            <div class="info-label">
+                                <i class="fas fa-dollar-sign"></i>
+                                Valor
+                            </div>
+                            <div class="info-value">$<%= casa.valor %></div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <a href="/auth/todas" class="btn-action btn-primary">
+                            <i class="fas fa-th-large"></i>
+                            Ver todas las casas
+                        </a>
+                        <a href="/auth/logout" class="btn-action btn-danger">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Cerrar sesión
+                        </a>
+                    </div>
+
+                <% } else { %>
+                    <!-- Access Denied Content -->
+                    <div class="access-denied">
+                        <div class="access-denied-icon">
+                            <i class="fas fa-user-lock"></i>
+                        </div>
+                        <h2 class="access-denied-title">Acceso Denegado</h2>
+                        <p class="access-denied-text">
+                            Para acceder al contenido de esta página y visualizar la información de tu propiedad, 
+                            necesitas iniciar sesión con tus credenciales.
+                        </p>
+                        <div class="action-buttons">
+                            <a href="/auth/login" class="btn-action btn-warning">
+                                <i class="fas fa-key"></i>
+                                Iniciar Sesión
+                            </a>
+                        </div>
+                    </div>
+                <% } %>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-        crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scrolling
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Enhanced button interactions
+            const buttons = document.querySelectorAll('.btn-action');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.02)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+                
+                button.addEventListener('mousedown', function() {
+                    this.style.transform = 'translateY(-1px) scale(0.98)';
+                });
+                
+                button.addEventListener('mouseup', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.02)';
+                });
+            });
+
+            // Add parallax effect to floating shapes
+            document.addEventListener('mousemove', function(e) {
+                const shapes = document.querySelectorAll('.floating-shape');
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+
+                shapes.forEach((shape, index) => {
+                    const speed = (index + 1) * 0.3;
+                    const xPos = (x - 0.5) * speed * 30;
+                    const yPos = (y - 0.5) * speed * 30;
+                    
+                    shape.style.transform = `translate(${xPos}px, ${yPos}px)`;
+                });
+            });
+
+            // Add loading effect to buttons on click
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (!this.classList.contains('loading')) {
+                        this.classList.add('loading');
+                        
+                        // Create ripple effect
+                        const ripple = document.createElement('div');
+                        const rect = this.getBoundingClientRect();
+                        const size = Math.max(rect.width, rect.height);
+                        const x = e.clientX - rect.left - size / 2;
+                        const y = e.clientY - rect.top - size / 2;
+                        
+                        ripple.style.cssText = `
+                            position: absolute;
+                            border-radius: 50%;
+                            background: rgba(255,255,255,0.3);
+                            transform: scale(0);
+                            animation: ripple 0.6s linear;
+                            width: ${size}px;
+                            height: ${size}px;
+                            left: ${x}px;
+                            top: ${y}px;
+                            pointer-events: none;
+                        `;
+                        
+                        this.appendChild(ripple);
+                        
+                        setTimeout(() => ripple.remove(), 600);
+                    }
+                });
+            });
+
+            // Add CSS for ripple animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Add tilt effect to the main card
+            const card = document.querySelector('.session-card');
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+    </script>
 </body>
 
 </html>

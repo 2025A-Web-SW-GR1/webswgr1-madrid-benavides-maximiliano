@@ -4,175 +4,661 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Todas las Casas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Galería de Propiedades Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            background-color: #f4f7fa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .bg-circle:nth-child(1) { width: 200px; height: 200px; top: 10%; left: 10%; animation-delay: 0s; }
+        .bg-circle:nth-child(2) { width: 150px; height: 150px; top: 60%; right: 10%; animation-delay: 2s; }
+        .bg-circle:nth-child(3) { width: 100px; height: 100px; bottom: 20%; left: 20%; animation-delay: 4s; }
+        .bg-circle:nth-child(4) { width: 120px; height: 120px; top: 30%; right: 30%; animation-delay: 1s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-30px) rotate(180deg); opacity: 0.6; }
+        }
+
+        /* Header section */
         .header-section {
-            background-color: #ffffff;
-            border-bottom: 1px solid #dee2e6;
-            padding: 2rem 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 30px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .header-title {
-            color: #212529;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .back-button {
-            transition: all 0.2s ease-in-out;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .back-button:hover {
-            background-color: #5a6268;
-            transform: scale(1.05);
-        }
-
-        .table-custom {
-            background-color: #ffffff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .table-custom thead {
-            background-color: #0d6efd;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
             color: white;
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
-        .table-custom th,
-        .table-custom td {
-            padding: 1rem;
-            vertical-align: middle;
+        /* Main content */
+        .main-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
-        .table-custom tbody tr:hover {
-            background-color: #e9ecef;
+        /* Properties grid */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
         }
 
-        .table-image {
-            width: 100px;
-            height: 70px;
+        /* Property card */
+        .property-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        .property-card:nth-child(1) { animation-delay: 0.1s; }
+        .property-card:nth-child(2) { animation-delay: 0.2s; }
+        .property-card:nth-child(3) { animation-delay: 0.3s; }
+        .property-card:nth-child(4) { animation-delay: 0.4s; }
+        .property-card:nth-child(5) { animation-delay: 0.5s; }
+        .property-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .property-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Image container */
+        .image-container {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .property-image {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border-radius: 8px;
+            transition: all 0.4s ease;
             cursor: pointer;
-            /* Añade un cursor de puntero para indicar que es clickeable */
-            transition: transform 0.2s ease-in-out;
         }
 
-        .table-image:hover {
+        .property-card:hover .property-image {
             transform: scale(1.1);
-            /* Efecto de zoom al pasar el mouse */
         }
 
-        .table-custom tr {
-            border-bottom: 1px solid #dee2e6;
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
-        .table-custom tr:last-child {
+        .image-container:hover .image-overlay {
+            opacity: 1;
+        }
+
+        /* Property ID badge */
+        .property-id {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+        }
+
+        /* Card content */
+        .card-content {
+            padding: 25px;
+        }
+
+        .property-name {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .property-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-row:last-child {
             border-bottom: none;
         }
 
-        /* Estilos para el modal personalizado */
+        .detail-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .detail-label i {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .detail-value {
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .price-value {
+            background: linear-gradient(135deg, #feca57, #ff9ff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .modal-content {
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow: hidden;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
         }
 
-        .modal-body-custom {
-            padding: 0;
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
         }
 
-        .modal-body-custom img {
+        .modal-image {
             width: 100%;
             height: auto;
-            border-radius: 15px;
+            display: block;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.7;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .empty-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .empty-text {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Loading skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .property-card {
+                margin: 0 10px;
+            }
+
+            .main-content {
+                padding: 30px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.8rem;
+            }
+
+            .property-card {
+                margin: 0 5px;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid header-section">
-        <div class="container d-flex justify-content-between align-items-center">
-            <h1 class="display-4 fw-bold header-title">
-                Todas las Casas
+    <!-- Animated Background -->
+    <div class="bg-effects">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+
+    <!-- Header Section -->
+    <div class="header-section">
+        <div class="header-container">
+            <h1 class="header-title">
+                <i class="fas fa-home"></i>
+                Galería de Propiedades
             </h1>
-            <a href="/auth/sesion" class="btn btn-secondary btn-lg back-button">
-                <i class="fas fa-arrow-left"></i> Volver a Sesión
+            <a href="/auth/sesion" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Volver a Sesión
             </a>
         </div>
     </div>
 
-    <div class="container mt-5">
-        <% if (casas && casas.length> 0) { %>
-            <div class="table-responsive">
-                <table class="table table-hover table-custom">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Imagen</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Propietario</th>
-                            <th scope="col">Valor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% casas.forEach(function(casa) { %>
-                            <tr>
-                                <th scope="row">
-                                    <%= casa.id %>
-                                </th>
-                                <td>
-                                    <img src="<%= casa.imagenURL %>" class="table-image" alt="Imagen de la casa"
-                                        data-bs-toggle="modal" data-bs-target="#imageModal"
-                                        data-image-url="<%= casa.imagenURL %>">
-                                </td>
-                                <td>
-                                    <%= casa.nombre %>
-                                </td>
-                                <td>
-                                    <%= casa.username %>
-                                </td>
-                                <td>
-                                    <i class="fas fa-dollar-sign"></i>
-                                    <%= casa.valor %>
-                                </td>
-                            </tr>
-                            <% }); %>
-                    </tbody>
-                </table>
+    <!-- Main Content -->
+    <div class="main-content">
+        <% if (casas && casas.length > 0) { %>
+            <div class="properties-grid">
+                <% casas.forEach(function(casa, index) { %>
+                    <div class="property-card">
+                        <div class="image-container">
+                            <div class="property-id">#<%= casa.id %></div>
+                            <img src="<%= casa.imagenURL %>" 
+                                 class="property-image" 
+                                 alt="<%= casa.nombre %>"
+                                 onclick="openModal('<%= casa.imagenURL %>')">
+                            <div class="image-overlay">
+                                <i class="fas fa-search-plus"></i>
+                                Ver Imagen Completa
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="property-name"><%= casa.nombre %></h3>
+                            <div class="property-details">
+                                <div class="detail-row">
+                                    <div class="detail-label">
+                                        <i class="fas fa-user-circle"></i>
+                                        Propietario
+                                    </div>
+                                    <div class="detail-value"><%= casa.username %></div>
+                                </div>
+                                <div class="detail-row">
+                                    <div class="detail-label">
+                                        <i class="fas fa-dollar-sign"></i>
+                                        Valor
+                                    </div>
+                                    <div class="detail-value price-value">$<%= casa.valor %></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
             </div>
-            <% } else { %>
-                <div class="alert alert-info text-center" role="alert">
-                    No hay casas disponibles para mostrar.
+        <% } else { %>
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <i class="fas fa-home"></i>
                 </div>
-                <% } %>
+                <h2 class="empty-title">No hay propiedades disponibles</h2>
+                <p class="empty-text">
+                    Actualmente no tenemos propiedades para mostrar. 
+                    Vuelve más tarde para descubrir nuevas oportunidades inmobiliarias.
+                </p>
+            </div>
+        <% } %>
     </div>
 
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body modal-body-custom">
-                    <img src="" id="modalImage" class="img-fluid" alt="Imagen de la casa ampliada">
-                </div>
-            </div>
+    <!-- Modal -->
+    <div class="modal-overlay" id="imageModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="" id="modalImage" class="modal-image" alt="Imagen ampliada">
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const imageModal = document.getElementById('imageModal');
-            imageModal.addEventListener('show.bs.modal', function (event) {
-                const button = event.relatedTarget;
-                const imageUrl = button.getAttribute('data-image-url');
-                const modalImage = imageModal.querySelector('#modalImage');
-                modalImage.src = imageUrl;
+        document.addEventListener('DOMContentLoaded', function() {
+            // Staggered animation for cards
+            const cards = document.querySelectorAll('.property-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Enhanced hover effects
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '20';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '10';
+                });
+            });
+
+            // Parallax effect for background circles
+            document.addEventListener('mousemove', function(e) {
+                const circles = document.querySelectorAll('.bg-circle');
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+
+                circles.forEach((circle, index) => {
+                    const speed = (index + 1) * 0.5;
+                    const xPos = (x - 0.5) * speed * 50;
+                    const yPos = (y - 0.5) * speed * 50;
+                    
+                    circle.style.transform = `translate(${xPos}px, ${yPos}px)`;
+                });
+            });
+
+            // Enhanced back button interaction
+            const backButton = document.querySelector('.back-button');
+            backButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Add loading effect
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cargando...';
+                this.style.pointerEvents = 'none';
+                
+                setTimeout(() => {
+                    window.location.href = this.href;
+                }, 500);
+            });
+
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'slideInUp 0.6s ease-out forwards';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => observer.observe(card));
+        });
+
+        // Modal functions
+        function openModal(imageUrl) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            
+            modalImage.src = imageUrl;
+            modal.classList.add('active');
+            
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            
+            // Restore body scroll
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on overlay click
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Add ripple effect to property cards
+        document.querySelectorAll('.property-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Don't trigger if clicking on image (which has its own click handler)
+                if (!e.target.classList.contains('property-image')) {
+                    const ripple = document.createElement('div');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255,255,255,0.3);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        pointer-events: none;
+                        z-index: 100;
+                    `;
+                    
+                    this.style.position = 'relative';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
+                }
             });
         });
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 
